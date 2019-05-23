@@ -11,7 +11,7 @@ var config = require("../config.json"),
 winston.level = config.loglevel;
 
 // Use redis as our key-value store
-var client = redis.createClient();
+var client = redis.createClient(config.redis_port, config.redis_host);
 
 // resubscribes a socket to an existing pending job,
 // otherwise reports contents from redis

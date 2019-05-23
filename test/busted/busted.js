@@ -7,6 +7,7 @@ var fs        = require('fs'),
     redis     = require('redis'),
     busted    = require(__dirname + '/../../app/busted/busted.js'),
     job       = require(__dirname + '/../../app/job.js'),
+    config = require("./../../config.json"),
     ss        = require('socket.io-stream');
 
 winston.level = 'warn';
@@ -19,7 +20,7 @@ var options ={
     'force new connection': true
     };
     
-var client = redis.createClient();
+var client = redis.createClient(config.redis_port, config.redis_host);
 
 describe('busted jobrunner', function() {
 

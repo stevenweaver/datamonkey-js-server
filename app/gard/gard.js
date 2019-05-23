@@ -8,7 +8,7 @@ var config = require("../../config.json"),
   translate_gard = require("translate-gard");
 
 // Use redis as our key-value store
-var client = redis.createClient();
+var client = redis.createClient(config.redis_port, config.redis_host);
 
 var gard = function(socket, stream, params) {
   var self = this;

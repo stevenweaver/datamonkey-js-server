@@ -14,7 +14,7 @@ var spawn = require("child_process").spawn,
   redis = require("redis");
 
 // Use redis as our key-value store
-var client = redis.createClient();
+var client = redis.createClient(config.redis_port, config.redis_host);
 
 var hivtrace = function(socket, stream, params) {
   var self = this;
@@ -364,7 +364,7 @@ var HivTraceRunner = function(id, hivtrace_log) {
   var self = this;
   self.python_redis_channel = "python_" + id;
   self.hivtrace_log = hivtrace_log;
-  self.subscriber = redis.createClient();
+  self.subscriber = redis.createClient(config.redis_port, config.redis_host);
   self.subscriber.subscribe(self.python_redis_channel);
   self.last_status_update = "";
 };

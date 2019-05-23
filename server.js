@@ -36,14 +36,18 @@ if (program.port) {
   var io = require("socket.io").listen(config.port);
 };
 
-
 winston.level = config.loglevel;
 
-var client = redis.createClient();
+var client = redis.createClient(config.redis_port, config.redis_host).on('error', function(){
+  winston.error("Redis Server is unreachable: " + config.redis_host + ":" + config.redis_port); 
+  throw new Error("Redis Server is unreachable, review config.json file for Redis configuration");
+});
+
 
 // clear active_jobs list
 // TODO: we should do more than just clear the active_jobs list
 client.del("active_jobs");
+
 
 // For every new connection...
 io.sockets.on("connection", function(socket) {

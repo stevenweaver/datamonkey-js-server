@@ -1,6 +1,6 @@
 {
-  "port"                   : 7010,
-  "redis_host"             : "192.168.0.2",
+  "port"                   : 7013,
+  "redis_host"             : "127.0.0.1",
   "redis_port"             : 6379,
   "loglevel"               : "info",
   "tn93dist"               : "/opt/hivtrace/TN93/tn93",
